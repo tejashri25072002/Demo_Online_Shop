@@ -1,0 +1,67 @@
+    {% extends 'base.html' %} 
+
+    {% block 'main' %}
+
+    {% load static %}
+<!--Main Section Start-->
+<div class="row mt-3">
+    <!--Filter side bar start-->
+    <div class="col-md-4 bg-light">
+        <h5>Filter By Category</h5>
+        <hr>
+        <p><a href="/catfilter/1">By Mobiles</a></p>
+        <p><a href="/catfilter/2">By Shoes</a></p>
+        <p><a href="/catfilter/3">By Clothes</a></p>
+        <h5>Filter By Price</h5>
+        <hr>
+        <form action="/range">
+            <div>
+                <label for="" class="form-label">Min Val</label>
+                <input type="number" name="min" class="form-control" placeholder="Minimum Value">
+            </div>
+            <div>
+                <label for="" class="form-label">Max Val</label>
+                <input type="number" name="max" class="form-control" placeholder="Maximum Value">
+            </div><br>
+            <div>
+                <input type="submit" class="btn btn-danger">
+            </div>
+        </form><br>
+        <h5>Sort By</h5>
+        <hr>
+        <p><a href="/sort/0">Low to High</a></p>
+        <p><a href="/sort/1">High to Low</a></p>
+    </div>
+    <!--Filter side bar end-->
+
+    <!--Product Section Start-->
+    <div class="col-md-8">
+        <h3>Products</h3>
+        <div class="row">
+            {% for x in products %}
+            <div class="col-md-4">
+                <!--product -1-->
+                <div class="card mt-3 " style="width: 100%;">
+                    <img src="{{x.pimage.url}}" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                      <h5 class="card-title">{{x.name}}</h5>
+                      <p class="card-text">Rs: {{x.price}}</p>
+                      {% if x.cat == 1 %}
+                      <p class="card-text">Mobiles</p>
+                      {% elif x.cat == 2 %}
+                      <p class="card-text">Shoes</p>
+                      {% else %}
+                      <p class="card-text">Clothes</p>
+                      {% endif %}
+                      <a href="/pdetails/{{x.id}}" class="btn btn-danger">See Details</a>
+                    </div>
+                </div>&nbsp;
+            </div>
+            {% endfor %}
+        </div>
+    <!--Product Section end-->
+    </div>
+</div>
+<!--main Section End-->
+
+{% endblock 'main' %}
